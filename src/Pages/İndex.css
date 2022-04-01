@@ -57,6 +57,59 @@
 p {
     line-height: 1.5;
 }
+
+.l-box{ 
+    width: 70%;
+    height: 50%;
+    margin-top: 5%;
+    color: #27aae1;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.l-line{
+    width: 110px;
+    height: 5px;
+    background-color: #ccc;
+}
+
+.l-text{
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.l-box2{
+    width: 70%;
+    height: 50%;
+}
+.l-inpt{
+    border-color: rgba(128, 128, 128, 0.185);
+}
+.l-inpt:hover{
+    border-color: #27AAE1;
+}
+.l-button{
+    color: #FFF;
+    background-color: #27aae1;
+    border-radius: 5px;
+    width: 250px;
+    height: 50px;
+}
+.l-button:hover{
+    background-color: #3195c0;
+    color: #FFF;
+}
+.l-baslik{
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+
+
 .testform .projectform {
     width: 100%;
     float: left;

@@ -82,6 +82,7 @@ const İndex = () => {
                                     <p>&nbsp;</p>    
                                 </div>
 
+                              
                                 <div>
                                     <div className='test-question'>
                                         <p>{currentQuestion.question}</p>
@@ -102,6 +103,7 @@ const İndex = () => {
                                         : ''
                                     }
                                 </div>
+                           
                                 <div className='test-buttons'>
                                     <button onClick={() => changeQuestion('prev')} className='buttons'><span> <i className="fa-solid fa-angles-left"></i> ÖNCEKİ</span> </button>
                                     <button onClick={() => changeQuestion('next')} className='buttons'><span>SONRAKİ <i className="fa-solid fa-angles-right"></i> </span></button>

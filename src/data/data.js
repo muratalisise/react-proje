@@ -3,7 +3,6 @@ const data =
         {
 
             question : "My mother’s manager……….speak three languages.",
-            numarator : 1,
             question_type : 1,
             prograssbar:{},
             answers : [
@@ -19,19 +18,18 @@ const data =
                 },
                 {
                     answer : "are",
-                    slug : "cevap2",
+                    slug : "cevap3",
                     true : 1
                 },
                 {
                     answer : "has",
-                    slug : "cevap2",
+                    slug : "cevap4",
                     true : 1
                 }
             ]
         },
         {
             question : "Listen! There is……..at the door. Let’s open it and see who it is!",
-            numarator : 2,
             question_type : 1,
             answers : [
                 {
@@ -59,7 +57,6 @@ const data =
         },
         {
             question : "Chairs are……….than armchairs.",
-            numarator : 3,
             question_type : 1,
             answers : [
                 {
@@ -88,7 +85,6 @@ const data =
         },
         {
             question : "I’m so tired.” “……………you like to lie down a bit?",
-            numarator : 4,
             question_type : 1,
             answers : [
                 {
@@ -117,7 +113,6 @@ const data =
         },
         {
             question : "I am a writer. I……….five books so far.",
-            numarator : 5,
             question_type : 1,
             answers : [
                 {
@@ -146,7 +141,6 @@ const data =
         },
         {
             question : "I can swim……..my brother.",
-            numarator : 6,
             question_type : 1,
             answers : [
                 {
@@ -175,7 +169,6 @@ const data =
         },
         {
             question : "Tim: “………….any interesting news in the paper?”",
-            numarator : 7,
             question_type : 1,
             answers : [
                 {
@@ -204,7 +197,6 @@ const data =
         },
         {
             question : "If you don’t know what the word means, …………in your dictionary.",
-            numarator : 8,
             question_type : 1,
             answers : [
                 {
@@ -233,7 +225,6 @@ const data =
         },
         {
             question : "My sister………….…..in the city center for about two years.",
-            numarator : 9,
             question_type : 1,
             answers : [
                 {
@@ -262,7 +253,6 @@ const data =
         },
         {
             question : "When I was a student, I…………….earn my pocket money.",
-            numarator : 10,
             question_type : 1,
             answers : [
                 {
