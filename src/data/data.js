@@ -4,7 +4,6 @@ const data =
 
             question : "My mother’s manager……….speak three languages.",
             question_type : 1,
-            prograssbar:{},
             answers : [
                 {
                     answer : "can",

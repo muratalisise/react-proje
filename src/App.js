@@ -3,6 +3,7 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import İndex from "./Pages/İndex"
 import Login from './Pages/Login';
+import Finish from './Pages/Finish';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                   <Route index element={<İndex/>} /> 
                   <Route path={"/"} element={<İndex/>}/>
                   <Route path={"/Login"} element={<Login/>}/>
+                  <Route path={"/Finish"} element={<Finish/>}/>
                 </Route>
               </Routes>
             </BrowserRouter>
