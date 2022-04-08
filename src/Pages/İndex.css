@@ -224,3 +224,8 @@ a, button {
     float: left;
 }
 
+.error{
+    border:1px solid red !important;
+    background-color: #ff562227;
+    color: rgba(233, 62, 10, 0.37);
+}

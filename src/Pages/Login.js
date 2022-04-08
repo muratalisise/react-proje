@@ -1,13 +1,16 @@
 import React, { Component, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./İndex.css"
 import İndex from './İndex';
+import logdata from '../data/Login-data';
+import Header from './Header';
+import Article from './Article';
+import Footer from './Footer';
 
 
 const Login = () => {
-
-            
+      const [errors , setErrors] = useState([]);
           const [formValues, setFormValue] = useState({
             name : '',
             email : '',
@@ -15,41 +18,51 @@ const Login = () => {
             work_position : null,
             work_sector : null
           });
-          const [nameErr, setNameErr] = useState("");
+          const navigate = useNavigate();
 
           const myForm = (e) => {
             e.preventDefault();
-            formValidation();
-          }
-
-          const formValidation = () => {
-
-            const nameErr = {};
-            let isValid = true;
-
-            if(formValues.name == ''){
-              alert('Lütfen isminizi giriniz.');
+            let errorsx = [];
+            if(formValues.name == '' || formValues.name == null){ 
+               errorsx = [
+                ...errorsx,
+                "name"
+              ]
             }
 
-            if(formValues.email == ''){
-              alert('Lütfen E-mail giriniz.');
+            if(formValues.email == '' || formValues.email == null){
+              errorsx = [
+                ...errorsx,
+                "email",
+              ]
+              
             }
 
             if(formValues.phone == ''){
-              alert('Lütfen phone giriniz.');
+              errorsx = [
+                ...errorsx,
+                "phone",
+              ]
             }
 
             if(formValues.work_position == ''){
-              alert('Lütfen çalıştığınız Pozisyon giriniz.');
+              setErrors([
+                ...errors,
+                "work_position"
+              ])
             }
 
             if(formValues.work_sector == ''){
-              alert('Lütfen çalıştığınız sektörü giriniz');
+              setErrors([
+                ...errors,
+                "work_sector"
+              ])
             }
-
-            setNameErr(nameErr);
-            return isValid;
-
+            if(errorsx.length == 0){
+              navigate('/')
+            }else{
+              setErrors(errorsx);
+            }
           }
 
   const formValueChange = (column,value) => {
@@ -62,58 +75,47 @@ const Login = () => {
     return (
         <div>
             <article className='l-article mx-auto my-auto'>
-                <div className='l-box mx-auto'>
-                    <h1 className='l-baslik'>TEST</h1>
-                    <div className='l-line mx-auto'></div>
-                    <p className='l-text mt-3'>Teste başlamak için lütfen aşağıda yer alan alanları eksiksiz bir şekilde doldurunuz.</p>
-                </div>
+                <Header data={{title:"Test",description:"Teste başlamak için lütfen aşağıda yer alan alanları eksiksiz bir şekilde doldurunuz."}}/>
                 <div className='l-box2 mx-auto text-start'>
-                  <form >
+                  <form>
+
                 <div className='row '>
                     <div className='col-md-6'> 
-                          <label htmlFor='name'>Ad Soyad</label> <br />
-                          <input className='form-control l-inpt' id='name'  name='name' type="text" value={formValues.name} onChange={(e) => {formValueChange('name',e.target.value)}}   ></input> <br />
-                            {
-                              Object.keys(nameErr).map((key) => {
-                                return <div style={{color:"red"}}> {nameErr[key]} </div>
-                              })
-                            }
-                          <label htmlFor='email'>E-mail</label> <br />
-                          <input className='form-control l-inpt' value={formValues.email} onChange={(e) => formValueChange('email',e.target.value)} id='email' name='email' type="email"></input> <br />
+                          <Article formEleman={{formTitle:"Ad Soyad"}}/>
+                          <input className={["form-control l-inpt",errors.includes("email") == true ? "error" : ""].join(' ')} id='name'  name='name' type="text" value={formValues.name} onChange={(e) => {formValueChange('name',e.target.value)}}   ></input> <br />
+                            
+                          <Article errorCheck={errors.includes("email") ? true : false} formEleman={{formEmail:"E-mail"}}/>
+                          <input className={["form-control l-inpt",errors.includes("email") == true ? "error" : ""].join(' ')} value={formValues.email} onChange={(e) => formValueChange('email',e.target.value)} id='email' name='email' type="email"></input> <br />
 
-                          <label htmlFor='phone'>Telefon</label> <br />
-                          <input className='form-control l-inpt' id='phone' name='phone' value={formValues.phone} onChange={(e) => formValueChange('phone',e.target.value)} type="text"  pattern="[0-9]{4}-[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder='0___-___-__-__'></input> <br />
+                          <Article formEleman={{formPhone:"Telefon"}}/>
+                          <input className={["form-control l-inpt",errors.includes("email") == true ? "error" : ""].join(' ')} id='phone' name='phone' value={formValues.phone} onChange={(e) => formValueChange('phone',e.target.value)} type="text"  pattern="[0-9]{4}-[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder='0___-___-__-__'></input> <br />
                     </div>
 
                     <div className='col-md-6'> 
-                          <label>Çalıştığınız Pozisyon</label> <br />
-                          <select className="form-select l-inpt" id='work_position' aria-label="Default select example" value={formValues.work_position} onChange={(e)=> formValueChange("work_position",e.target.value)}>
-                            <option selected>Seçiniz...</option>
-                            <option value="1">Çalışmıyor</option>
-                            <option value="2">Öğrenci</option>
-                            <option value="3">Öğretmen</option>
-                            <option value="4">İşçi</option>
-                            <option value="5">Mühendis</option>
-                          </select>
-                          <label className='mt-4'>Çalıştığınız Sektör</label> <br />
-                          <select className="form-select l-inpt" id='work_sector' aria-label="Default select example" value={formValues.work_sector} onChange={(e) => formValueChange("work_sector",e.target.value)}>
-                            <option selected>Seçiniz...</option>
-                            <option value="1">Satış/TeleSatış</option>
-                            <option value="2">Muhasebe/Finans</option>
-                            <option value="3">Bilişim/Telekom</option>
-                            <option value="3">Sağlık</option>
-                            <option value="3">Yapı/Mimar/İnşaat</option>
-                          </select>                   
+                            {
+                              logdata.map((item) => {
+                                return(
+                                  <div  style={item.style}>
+                                    <label className=''>{item.title}</label> <br />
+                                    <select className={["form-select l-inpt",errors.includes("email") == true ? "error" : ""].join(' ')} id='work_position' aria-label="Default select example" value={formValues.work_position} onChange={(e)=> formValueChange("work_position",e.target.value)}>
+                                      { 
+                                        item.selectValues.map((selectValue) => {
+                                          return(
+                                            <option value={selectValue.value}>{selectValue.showValue}</option>
+                                          )
+                                        })
+                                      }
+                                    </select>
+                                  </div>
+                                )
+                              })
+                            }          
                       </div>
-                      
-                  <button className='l-button btn mx-auto mt-4' type='submit' onClick={myForm} style={{color:"white"}}> <Link style={{color:"white"}} to="/">TESTE BAŞLAYIN</Link>  </button>
-                </div>
+                      <button className='l-button btn btn-lg mx-auto' onClick={(e) => {myForm(e)}}>TESTE BAŞLAYIN </button>
+                  </div>
                 </form>
                     <hr></hr>
-                  <div className='box'>
-                  Katıldığınız online sınav İstanbul Teknik Üniversitesi Genel İngilizce Kursu için seviye belirleme niteliğindedir. Sınav sonucunda belirlenen seviyeniz katılmanız gereken kurs programının seviyesini göstermektedir.
-                  </div>
-
+                    <Footer footBox={{text:"Katıldığınız online sınav İstanbul Teknik Üniversitesi Genel İngilizce Kursu için seviye belirleme niteliğindedir. Sınav sonucunda belirlenen seviyeniz katılmanız gereken kurs programının seviyesini göstermektedir."}} />
                 </div>
             </article>
         </div>

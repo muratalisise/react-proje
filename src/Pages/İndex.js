@@ -4,7 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Login';
 import "./İndex.css"
 import data from '../data/data';    
-
+import { useTimer } from 'react-timer-hook';
+import Header from './Header';
+import HomePageHeader from './HomePageHeader';
+import HomePageFooter from './HomePageFooter';
 
 const İndex = () => {
     const [currentQuestionNumber,setCurrentQuestionNumber] = useState(0);
@@ -13,7 +16,24 @@ const İndex = () => {
     const [currentQuestion,setCurrentQuestion] = useState({});
     const [tempAnswer,setTempAnswer] = useState(null);
     const [prograssbarnumber, setprograssBarNumber] = useState(0);
-    const [timer, setTimer] = useState(0);
+
+    const MyTimer = ({ expiryTimestamp }) => {
+        const {
+          seconds,
+          minutes,
+          hours,
+    } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
+
+    return (
+        <div style={{textAlign: 'center'}}>
+          <div >
+            <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+          </div>
+          
+        </div>
+      );
+    }
+      
 
 
     const AnswerQuestion = (slug) => {
@@ -30,7 +50,7 @@ const İndex = () => {
 
 
 
-
+ 
     useEffect(() => {
         if(lastQuestionsAnswers.find((item,i) => i == prograssbarnumber)){
             setTempAnswer(lastQuestionsAnswers.find((item,i) => i == prograssbarnumber));
@@ -38,13 +58,6 @@ const İndex = () => {
         setCurrentQuestion(data.find((item,key) => key==prograssbarnumber));
     }, [prograssbarnumber])
 
-
-
-    useEffect(() => {
-        setInterval(() => {
-          setTimer(timer => timer + 1);
-        }, 1000);
-      }, [])
 
 
     const changeQuestion = (param1) => {
@@ -79,35 +92,30 @@ const İndex = () => {
         setTempAnswer(null);
     }
 
+    const time = new Date();
+  time.setSeconds(time.getSeconds() + 5100); // 10 minutes timer
     return (
 <div>                  
            <article className='article mx-auto' id='ortala' >
                 <div className='article container'>
                     <div className='article row'>
                         <div className='module col-lg-12 col-md-12 col-sm-12' id='modular-questions'></div>
-                        <div className='module col-lg-12 col-md-12 col-sm-12  ' id='module-test'>
-
+                        <div className='module col-lg-12 col-md-12 col-sm-12' id='module-test'>
                                 <div className='test-title'>
                                     <span>{currentQuestionNumber+1}</span>
                                     <div>
-                                            {timer}    
+                                    <MyTimer expiryTimestamp={time} />
                                     </div>
-                                    <p>Lütfen sağlıklı bir değerlendirme için bilmediğiniz soruları boş bırakınız</p>
+                                    <HomePageHeader indexTitle={{title:"Lütfen sağlıklı bir değerlendirme için bilmediğiniz soruları boş bırakınız"}} /> 
                                 </div>
-                               
-
-                            
                                 <div className='test-description'>
                                     <p>&nbsp;</p>
-                                    <p>
-                                        <strong className='text-box'>Choose the best answer which completes the sentence.</strong>    
+                                    <p style={{float:"left"}}>
+                                            Choose the best answer which completes the sentence.       
                                     </p>    
                                     <p>&nbsp;</p>    
                                     <p>&nbsp;</p>    
                                 </div>
-
-                             
-                              
                                 <div>
                                     <div className='test-question'>
                                         <p>{currentQuestion.question}</p>
@@ -144,21 +152,11 @@ const İndex = () => {
                                     </p>
                                    
                                     <div style={{height:'10px',width:'100%'}}>
-                                     {/* <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width:"1.53846153846%"}} ></div> */}
                                         <div style={{height:'8px',width:`${(((currentQuestionNumber + 1) / data.length) * 100) + "%"}`,background:'#4DA4F0'}}></div>
                                     </div>
                                 </div>
-                                
-                               
 
-                                <div className='test-note'>
-                                Lütfen sağlıklı bir değerlendirme için bilmediğiniz soruları boş bırakınız    
-                                </div>
-                            <br />
-                            <hr />
-                            <div className='box'>
-                            Katıldığınız online sınav İstanbul Teknik Üniversitesi Genel İngilizce Kursu için seviye belirleme niteliğindedir. Sınav sonucunda belirlenen seviyeniz katılmanız gereken kurs programının seviyesini göstermektedir.
-                            </div>
+                                <HomePageFooter footText={{textBottom:"Lütfen sağlıklı bir değerlendirme için bilmediğiniz soruları boş bırakınız"}} footBox={{textBox:"Katıldığınız online sınav İstanbul Teknik Üniversitesi Genel İngilizce Kursu için seviye belirleme niteliğindedir. Sınav sonucunda belirlenen seviyeniz katılmanız gereken kurs programının seviyesini göstermektedir."}} />
                         </div>
                     </div>
                     <button className='btn btn-danger shadow mx-auto me-1 mt-4' id='i-button' type='submit'><Link style={{color:"white"}} to="./Finish">TESTİ BİTİR</Link></button>
